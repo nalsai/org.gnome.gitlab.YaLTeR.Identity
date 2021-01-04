@@ -57,8 +57,8 @@
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://gitlab.gnome.org/YaLTeR/identity/uploads/bd69a56ab1f764d6e9782a2f6c1a4768/identity-0.1.1.tar.xz",
-                    "sha256" : "152cde2c64aa7dc4bc3f7722cbf9c7c2612cb8887da11bd5bf1dbb83db827c10"
+                    "url" : "https://gitlab.gnome.org/YaLTeR/identity/uploads/a5889ef9e330cf9a22c6067059dcf0b0/identity-0.1.2.tar.xz",
+                    "sha256" : "98be425efed5f82724a5d8f2915228418b3c0273fb59386cd77e721299e7b3c1"
                 }
             ]
         }
