@@ -24,12 +24,7 @@
         "--device=dri"
     ],
     "build-options" : {
-        "append-path" : "/usr/lib/sdk/rust-stable/bin",
-        "env" : {
-            "G_MESSAGES_DEBUG" : "Identity",
-            "RUSTFLAGS" : "--remap-path-prefix =../",
-            "CARGO_HOME" : "/run/build/identity/cargo"
-        }
+        "append-path" : "/usr/lib/sdk/rust-stable/bin"
     },
     "modules" : [
         {
@@ -38,8 +33,8 @@
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://gitlab.gnome.org/YaLTeR/identity/uploads/a5889ef9e330cf9a22c6067059dcf0b0/identity-0.1.2.tar.xz",
-                    "sha256" : "98be425efed5f82724a5d8f2915228418b3c0273fb59386cd77e721299e7b3c1"
+                    "url" : "https://gitlab.gnome.org/YaLTeR/identity/uploads/bd04a5221794606c2d4a5a7b26df399c/identity-0.1.3.tar.xz",
+                    "sha256" : "0303b9a3d92f0202b1761650f32c2336d1bb303ceb416ea95f2317ded602c14d"
                 }
             ]
         }
