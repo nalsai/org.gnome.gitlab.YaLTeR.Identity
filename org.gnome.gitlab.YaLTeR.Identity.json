@@ -1,7 +1,7 @@
 {
     "app-id" : "org.gnome.gitlab.YaLTeR.Identity",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "40",
+    "runtime-version" : "42",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.rust-stable"
@@ -9,12 +9,16 @@
     "add-extensions": {
         "org.freedesktop.Platform.ffmpeg-full": {
             "directory": "lib/ffmpeg",
-            "version": "20.08",
+            "version": "21.08",
             "add-ld-path": "."
         }
     },
     "cleanup-commands": [
         "mkdir -p ${FLATPAK_DEST}/lib/ffmpeg"
+    ],
+    "cleanup" : [
+        "/bin/blueprint-compiler",
+        "/lib/pkgconfig"
     ],
     "command" : "identity",
     "finish-args" : [
@@ -28,13 +32,24 @@
     },
     "modules" : [
         {
+            "name" : "blueprint",
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/jwestman/blueprint-compiler.git",
+                    "commit" : "cd12c9442354c4e071d565d913bd239990fb383d"
+                }
+            ]
+        },
+        {
             "name" : "identity",
             "buildsystem" : "meson",
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://gitlab.gnome.org/YaLTeR/identity/uploads/bd04a5221794606c2d4a5a7b26df399c/identity-0.1.3.tar.xz",
-                    "sha256" : "0303b9a3d92f0202b1761650f32c2336d1bb303ceb416ea95f2317ded602c14d"
+                    "url" : "https://gitlab.gnome.org/YaLTeR/identity/uploads/b291d9a9a47dd2fb8107fb21aad4ee20/identity-0.2.0.tar.xz",
+                    "sha256" : "de6a169354df54b65093108e60be7bcd9675a04f8d2ca57c998fc535adce479f"
                 }
             ]
         }
