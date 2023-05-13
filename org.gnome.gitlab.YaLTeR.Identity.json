@@ -6,16 +6,6 @@
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "add-extensions": {
-        "org.freedesktop.Platform.ffmpeg-full": {
-            "directory": "lib/ffmpeg",
-            "version": "22.08",
-            "add-ld-path": "."
-        }
-    },
-    "cleanup-commands": [
-        "mkdir -p ${FLATPAK_DEST}/lib/ffmpeg"
-    ],
     "cleanup" : [
         "/bin/blueprint-compiler",
         "/lib/pkgconfig"
@@ -31,6 +21,46 @@
         "append-path" : "/usr/lib/sdk/rust-stable/bin"
     },
     "modules" : [
+        {
+            "name": "ffmpeg",
+            "config-opts": [
+                "--disable-debug",
+                "--disable-doc"
+            ],
+            "cleanup": [
+                "/share/ffmpeg/examples"
+            ],
+            "config-opts": [
+                "--libdir=/app/lib"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://ffmpeg.org/releases/ffmpeg-5.1.2.tar.xz",
+                    "sha256": "619e706d662c8420859832ddc259cd4d4096a48a2ce1eefd052db9e440eef3dc",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 5405,
+                        "url-template": "https://ffmpeg.org/releases/ffmpeg-$version.tar.xz"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "gst-libav",
+            "builddir": true,
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.20.5.tar.xz",
+                    "sha256": "b152e3cc49d014899f53c39d8a6224a44e1399b4cf76aa5f9a903fdf9793c3cc"
+                }
+            ],
+            "config-opts": [
+                "-Ddoc=disabled"
+            ]
+        },
         {
             "name" : "blueprint",
             "buildsystem" : "meson",
