@@ -1,0 +1,39 @@
+name: 📦 Build Flatpak
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  flatpak:
+    name: build-flatpak
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-44
+      options: --privileged
+    strategy:
+      matrix:
+        arch: [x86_64]
+      fail-fast: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - run: git config --global --add protocol.file.allow always
+      - name: Build Flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v4
+        with:
+          bundle: org.gnome.gitlab.YaLTeR.Identity.flatpak
+          manifest-path: org.gnome.gitlab.YaLTeR.Identity.json
+          cache-key: flatpak-builder-${{ github.sha }}
+          arch: ${{ matrix.arch }}
+          branch: stable
+      - name: Deploy
+        if: github.event_name != 'pull_request'
+        uses: flatpak/flatpak-github-actions/flat-manager@v3
+        with:
+          repository: ""
+          flat-manager-url: https://flatpak.hachiman.nils.moe
+          token: ${{ secrets.FLATMAN_TOKEN }}
